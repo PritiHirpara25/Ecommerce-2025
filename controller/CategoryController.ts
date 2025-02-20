@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 /*
     @usage : craete a category
     @method : POST
-    @params : category_name , category_description , category_logo , isActive
+    @params : no-params
     @url : http://localhost:8888/category
 */
 export const createCategory = async (request: Request, response: Response) => {
@@ -68,7 +68,7 @@ export const getAllCategory = async (request: Request, response: Response) => {
 /*
     @usage : Update category by Id
     @method : PUT
-    @params : category_name , category_description , category_logo , isActive
+    @params : categoryId
     @url : http://localhost:8888/category/:categoryId
 */
 export const updateCategoryById = async (request:Request , response:Response) => {

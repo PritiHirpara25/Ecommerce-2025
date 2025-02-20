@@ -6,7 +6,7 @@ import { EcomSubCategory } from '../models/EcomSubCategory';
 /*
     @usage : craete a SubCategory
     @method : POST
-    @params : category_id , name , description , logo , isActive
+    @params : no-params
     @url : http://localhost:8888/subcategory
 */
 export const createSubCategory = async (request:Request , response:Response) => {
@@ -73,7 +73,7 @@ export const getAllSubCategory = async (request: Request, response: Response) =>
 /*
     @usage : update SubCategory by Id
     @method : PUT
-    @params : category_id , name , description , logo , isActive
+    @params : subcategoryId
     @url : http://localhost:8888/subcategory/:subcategoryId
 */
 export const updateSubCategoryById = async (request:Request , response:Response) => {
