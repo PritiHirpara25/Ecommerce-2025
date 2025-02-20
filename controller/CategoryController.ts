@@ -90,7 +90,7 @@ export const updateCategoryById = async (request:Request , response:Response) =>
 
 /*
     @usage : Delete category by Id
-    @method : DELETE
+    @method : PUT
     @params : categoryId
     @url : http://localhost:8888/category/:categoryId
 */

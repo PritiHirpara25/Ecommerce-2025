@@ -11,7 +11,7 @@ const app : Application = express();
 app.use(express.json())
 
 // Category Router Configuration
-import categoryRouter from './routes/Categoryrouter';
+import categoryRouter from './routes/CategoryRouter';
 app.use('/category',categoryRouter);
 
 // SubCategory Router Configuration

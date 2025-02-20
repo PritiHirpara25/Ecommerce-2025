@@ -10,12 +10,12 @@ import { EcomSubCategory } from '../models/EcomSubCategory';
     @url : http://localhost:8888/subcategory
 */
 export const createSubCategory = async (request:Request , response:Response) => {
-    let {category_id , name , description , logo , isActive} = request.body;
+    let {category_id , Sub_Category_name , Sub_Category_description , Sub_Category_logo , isActive} = request.body;
     const theSubCategory = await new SubCategoryTable({
         category_id:category_id,
-        name:name,
-        description:description,
-        logo:logo,
+        Sub_Category_name:Sub_Category_name,
+        Sub_Category_description:Sub_Category_description,
+        Sub_Category_logo:Sub_Category_logo,
         isActive:isActive
     }).save();
     if(theSubCategory){
@@ -77,19 +77,28 @@ export const getAllSubCategory = async (request: Request, response: Response) =>
     @url : http://localhost:8888/subcategory/:subcategoryId
 */
 export const updateSubCategoryById = async (request:Request , response:Response) => {
-    let {category_id , name , description , logo , isActive} = request.body;
+    let {category_id , Sub_Category_name , Sub_Category_description , Sub_Category_logo , isActive} = request.body;
     let {subcategoryId} = request.params;
     let mongoSubCategoryId = new mongoose.Types.ObjectId(subcategoryId)
     const theSubCategory : EcomSubCategory | null | undefined = await SubCategoryTable.findByIdAndUpdate(mongoSubCategoryId , {
         category_id:category_id,
-        name:name,
-        description:description,
-        logo:logo,
+        Sub_Category_name:Sub_Category_name,
+        Sub_Category_description:Sub_Category_description,
+        Sub_Category_logo:Sub_Category_logo,
         isActive:isActive
     });
     if(theSubCategory){
         return response.status(200).json({msg:"Updated successfully"})
     }
 }
+
+/*
+    @usage : Delete category by Id
+    @method : PUT
+    @params : subcategoryId
+    @url : http://localhost:8888/category/:subcategoryId
+*/
+
+
 
 
