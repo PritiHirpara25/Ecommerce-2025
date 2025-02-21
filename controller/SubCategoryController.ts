@@ -98,6 +98,14 @@ export const updateSubCategoryById = async (request:Request , response:Response)
     @params : subcategoryId
     @url : http://localhost:8888/category/:subcategoryId
 */
+export const deleteSubCategoryById = async (request:Request , response:Response) => {
+    let {subcategoryId} = request.params;
+    let mongoSubCategoryId = new mongoose.Types.ObjectId(subcategoryId)
+    const theSubCategory : EcomSubCategory | null | undefined = await SubCategoryTable.findByIdAndDelete(mongoSubCategoryId);
+    if(theSubCategory){
+        return response.status(200).json({msg:"deleted successfully"})
+    }
+}
 
 
 
