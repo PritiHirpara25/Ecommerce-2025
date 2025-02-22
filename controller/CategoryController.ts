@@ -74,20 +74,25 @@ export const getAllCategory = async (request: Request, response: Response) => {
 export const updateCategoryById = async (request:Request , response:Response) => {
     let {category_name, category_description, category_logo , isActive} = request.body;
     let {categoryId} = request.params;
-    const mongoCategoryId = new mongoose.Types.ObjectId(categoryId);
-    const theCategory : EcomCategory | undefined | null = await CategoryTable.findByIdAndUpdate(mongoCategoryId , {
-        category_name:category_name,
-        category_description:category_description,
-        category_logo:category_logo,
-        isActive:isActive
-    }) 
-    // if(theCategory){
-        return response.status(200).json({
-            msg:"Category updated successfully",
-            data:theCategory
-        })
+    try{
+        const mongoCategoryId = new mongoose.Types.ObjectId(categoryId);
+        const theCategory : EcomCategory | undefined | null = await CategoryTable.findByIdAndUpdate(mongoCategoryId , {
+            category_name:category_name,
+            category_description:category_description,
+            category_logo:category_logo,
+            isActive:isActive
+        },{new:true}) 
+        if(theCategory){
+            return response.status(200).json({
+                msg:"Category updated successfully",
+                data:theCategory
+            })
+        }
     }
-// }
+    catch{
+        return response.status(500).json("Something Went Wrong");
+    }
+}
 
 /*
     @usage : Delete category by Id
