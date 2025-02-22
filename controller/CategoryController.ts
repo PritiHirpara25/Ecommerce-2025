@@ -81,12 +81,13 @@ export const updateCategoryById = async (request:Request , response:Response) =>
         category_logo:category_logo,
         isActive:isActive
     }) 
-    if(theCategory){
+    // if(theCategory){
         return response.status(200).json({
-            msg:"Category updated successfully"
+            msg:"Category updated successfully",
+            data:theCategory
         })
     }
-}
+// }
 
 /*
     @usage : Delete category by Id

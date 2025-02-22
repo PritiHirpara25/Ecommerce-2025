@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema<EcomProduct>({
     Product_name:{type:String,required:true},
     Product_description:{type:String,required:true},
     Product_image:{type:String,required:true},
-    Product_Images:{type:[String],required:true},
+    Product_images:{type:[String],required:true},
     Product_price:{type:String,required:true},
     Product_brand:{type:String,required:true},
     Product_quantity:{type:Number,required:true},

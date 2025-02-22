@@ -18,6 +18,10 @@ app.use('/category',categoryRouter);
 import subCategoryRouter from './routes/SubCategoryRouter';
 app.use('/subcategory',subCategoryRouter)
 
+// ProductCategory Router Configuration
+import productRouter from './routes/ProductRouter';
+app.use('/product',productRouter)
+
 if(port){
     app.listen(Number(port) , () => {
         if(DB_url && DB_name){
