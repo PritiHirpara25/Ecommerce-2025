@@ -96,14 +96,22 @@ export const updateSubCategoryById = async (request:Request , response:Response)
     @usage : Delete category by Id
     @method : PUT
     @params : subcategoryId
-    @url : http://localhost:8888/category/:subcategoryId
+    @url : http://localhost:8888/subcategory/deletesubcategory:subcategoryId
 */
 export const deleteSubCategoryById = async (request:Request , response:Response) => {
     let {subcategoryId} = request.params;
-    let mongoSubCategoryId = new mongoose.Types.ObjectId(subcategoryId)
-    const theSubCategory : EcomSubCategory | null | undefined = await SubCategoryTable.findByIdAndDelete(mongoSubCategoryId);
-    if(theSubCategory){
-        return response.status(200).json({msg:"deleted successfully"})
+    try{
+        let mongoSubCategoryId = new mongoose.Types.ObjectId(subcategoryId)
+        const theSubCategory : EcomSubCategory | null | undefined = await SubCategoryTable.findByIdAndUpdate(mongoSubCategoryId,{isActive:false});
+        if(theSubCategory){
+            return response.status(200).json({msg:"deleted successfully"})
+        }
+        else{
+            return response.status(404).json({msg:"SubCategory Not Found..."})
+        }
+    }
+    catch{
+        return response.status(500).json({msg:"Something Went Wrong..."})
     }
 }
 

@@ -113,3 +113,27 @@ export const updateProductById = async(request:Request, response:Response) => {
         return response.status(500).json({msg:"Something Went Wrong"})
     }
 }
+
+
+/*
+    @usage : Delete category by Id
+    @method : PUT
+    @params : productId
+    @url : http://localhost:8888/product/deleteproduct/:productId
+*/
+export const deleteProductById = async(request:Request, response:Response) => {
+    let {productId} = request.params;
+    try{
+        const mongoProductId = new mongoose.Types.ObjectId(productId);
+        const theProduct : EcomProduct | null = await ProductTable.findByIdAndUpdate(mongoProductId,{isActive:false});
+        if(theProduct){
+            return response.status(200).json({msg:"Deleted Successfully"})
+        }
+        else{
+            return response.status(400).json({msg:"Product not Found"})
+        }
+    }
+    catch{
+        return response.status(500).json({msg:"Something Went Wrong..."})
+    }
+}

@@ -43,4 +43,14 @@ categoryRouter.put('/:categoryId' , async(request:Request , response:Response) =
     await CategoryController.updateCategoryById(request , response)
 })
 
+/*
+    @usage : Delete category by Id
+    @method : PUT
+    @params : categoryId
+    @url : http://localhost:8888/category/deletecategory/:categoryId
+*/
+categoryRouter.put('/deletecategory/:categoryId',async(request:Request,response:Response) => {
+    await CategoryController.deleteCategoryById(request , response)
+})
+
 export default categoryRouter

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 import { EcomCategory } from '../models/EcomCategory';
 import CategoryTable from '../database/CategorySchema';
 import mongoose from 'mongoose';
@@ -98,5 +98,21 @@ export const updateCategoryById = async (request:Request , response:Response) =>
     @usage : Delete category by Id
     @method : PUT
     @params : categoryId
-    @url : http://localhost:8888/category/:categoryId
+    @url : http://localhost:8888/category/deletecategory/:categoryId
 */
+export const deleteCategoryById = async (request:Request,response:Response) => {
+    const {categoryId} = request.params;
+    try{
+        const mongoCategoryId = new mongoose.Types.ObjectId(categoryId);
+        const theCategory : EcomCategory | null = await CategoryTable.findByIdAndUpdate(mongoCategoryId,{isActive:false},{new:true})
+        if(theCategory){
+            return response.status(200).json({msg:"Deleted Successfully"});
+        }
+        else{
+            return response.status(404).json({msg:"Category Not Found"});
+        }
+    }
+    catch{
+        return response.status(500).json({msg:"Something Went Wrong..."})
+    }
+}

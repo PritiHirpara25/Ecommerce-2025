@@ -46,4 +46,14 @@ productRouter.put('/:productId',async(request:Request,response:Response) => {
     await ProductController.updateProductById(request , response);
 })
 
+/*
+    @usage : Delete category by Id
+    @method : PUT
+    @params : productId
+    @url : http://localhost:8888/product/deleteproduct/:productId
+*/
+productRouter.put('/deleteproduct/:productId',async(request:Request, response:Response) => {
+    await ProductController.deleteProductById(request,response);
+})
+
 export default productRouter
