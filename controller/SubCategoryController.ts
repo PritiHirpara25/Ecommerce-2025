@@ -93,12 +93,12 @@ export const updateSubCategoryById = async (request:Request , response:Response)
 }
 
 /*
-    @usage : Delete category by Id
+    @usage : Update category Status by Id
     @method : PUT
     @params : subcategoryId
     @url : http://localhost:8888/subcategory/deletesubcategory:subcategoryId
 */
-export const deleteSubCategoryById = async (request:Request , response:Response) => {
+export const updateSubCategoryStatusById = async (request:Request , response:Response) => {
     let {subcategoryId} = request.params;
     try{
         let mongoSubCategoryId = new mongoose.Types.ObjectId(subcategoryId)

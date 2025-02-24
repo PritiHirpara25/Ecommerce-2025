@@ -10,7 +10,7 @@ import { EcomProduct } from '../models/EcomProduct';
     @url : http://localhost:8888/product
 */
 export const createProduct = async(request:Request , response:Response) => {
-    let {Sub_Category_id , Product_name, Product_description , Product_image , Product_images , Product_price , Product_brand , Product_quantity , isActive } = request.body;
+    let {Sub_Category_id , Product_name, Product_description , Product_image , Product_images , Product_price , Product_brand , Product_quantity } = request.body;
     try{
         const theProduct = await new ProductTable({
             Sub_Category_id:Sub_Category_id,
@@ -20,8 +20,7 @@ export const createProduct = async(request:Request , response:Response) => {
             Product_images:Product_images,
             Product_price:Product_price,
             Product_brand:Product_brand,
-            Product_quantity:Product_quantity,
-            isActive:isActive
+            Product_quantity:Product_quantity
         }).save();
         if(theProduct){
             return response.status(200).json(theProduct)
@@ -88,7 +87,7 @@ export const getAllProductById = async(request:Request,response:Response) => {
 */
 export const updateProductById = async(request:Request, response:Response) => {
     let {productId} = request.params;
-    let {Sub_Category_id , Product_name, Product_description , Product_image , Product_images , Product_price , Product_brand , Product_quantity , isActive } = request.body;
+    let {Sub_Category_id , Product_name, Product_description , Product_image , Product_images , Product_price , Product_brand , Product_quantity} = request.body;
     try{
         const mongoProductId = new mongoose.Types.ObjectId(productId)
         const theProduct :EcomProduct | null | undefined = await ProductTable.findByIdAndUpdate(mongoProductId,{
@@ -99,8 +98,7 @@ export const updateProductById = async(request:Request, response:Response) => {
             Product_images:Product_images,
             Product_price:Product_price,
             Product_brand:Product_brand,
-            Product_quantity:Product_quantity,
-            isActive:isActive
+            Product_quantity:Product_quantity
         }) 
         if(theProduct){
             return response.status(200).json({msg:"Updated Successfully",data:theProduct})
@@ -116,12 +114,12 @@ export const updateProductById = async(request:Request, response:Response) => {
 
 
 /*
-    @usage : Delete category by Id
+    @usage : Update Product Status By Id
     @method : PUT
     @params : productId
     @url : http://localhost:8888/product/deleteproduct/:productId
 */
-export const deleteProductById = async(request:Request, response:Response) => {
+export const updateProducStatustById = async(request:Request, response:Response) => {
     let {productId} = request.params;
     try{
         const mongoProductId = new mongoose.Types.ObjectId(productId);

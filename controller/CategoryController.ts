@@ -10,12 +10,11 @@ import mongoose from 'mongoose';
     @url : http://localhost:8888/category
 */
 export const createCategory = async (request: Request, response: Response) => {
-    let { category_name, category_description, category_logo , isActive } = request.body;
+    let { category_name, category_description, category_logo  } = request.body;
     let theCategory: EcomCategory | null | undefined = await new CategoryTable({
         category_name: category_name,
         category_description: category_description,
         category_logo: category_logo,
-        isActive:isActive
     }).save();
     if (theCategory) {
         return response.status(200).json({
@@ -72,15 +71,14 @@ export const getAllCategory = async (request: Request, response: Response) => {
     @url : http://localhost:8888/category/:categoryId
 */
 export const updateCategoryById = async (request:Request , response:Response) => {
-    let {category_name, category_description, category_logo , isActive} = request.body;
+    let {category_name, category_description, category_logo} = request.body;
     let {categoryId} = request.params;
     try{
         const mongoCategoryId = new mongoose.Types.ObjectId(categoryId);
         const theCategory : EcomCategory | undefined | null = await CategoryTable.findByIdAndUpdate(mongoCategoryId , {
             category_name:category_name,
             category_description:category_description,
-            category_logo:category_logo,
-            isActive:isActive
+            category_logo:category_logo
         },{new:true}) 
         if(theCategory){
             return response.status(200).json({
@@ -95,12 +93,12 @@ export const updateCategoryById = async (request:Request , response:Response) =>
 }
 
 /*
-    @usage : Delete category by Id
+    @usage : Update category Status by Id
     @method : PUT
     @params : categoryId
     @url : http://localhost:8888/category/deletecategory/:categoryId
 */
-export const deleteCategoryById = async (request:Request,response:Response) => {
+export const updateCategoryStatusById = async (request:Request,response:Response) => {
     const {categoryId} = request.params;
     try{
         const mongoCategoryId = new mongoose.Types.ObjectId(categoryId);

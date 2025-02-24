@@ -47,13 +47,13 @@ subCategoryRouter.put('/:subcategoryId', async (request: Request, response: Resp
 })
 
 /*
-    @usage : Delete category by Id
+    @usage : Update category Status by Id
     @method : PUT
     @params : subcategoryId
     @url : http://localhost:8888/subcategory/deletesubcategory/:subcategoryId
 */
 subCategoryRouter.put('/deletesubcategory/:subcategoryId', async (request: Request, response: Response) => {
-    await SubCategoryController.deleteSubCategoryById(request, response)
+    await SubCategoryController.updateSubCategoryStatusById(request, response)
 })
 
 
