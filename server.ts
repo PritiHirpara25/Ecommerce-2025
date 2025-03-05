@@ -22,6 +22,10 @@ app.use('/subcategory',subCategoryRouter)
 import productRouter from './routes/ProductRouter';
 app.use('/product',productRouter)
 
+// User Router Confuguration
+import userRouter from './routes/UserRouter';
+app.use('/users',userRouter)
+
 if(port){
     app.listen(Number(port) , () => {
         if(DB_url && DB_name){
